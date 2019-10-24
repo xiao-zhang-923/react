@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { inject, observer } from 'mobx-react/index'
 import { Form, Input, Row, Col } from 'antd'
 import PromptBox from '../../components/PromptBox'
+import { json } from 'graphlib'
 
 
 @withRouter @inject('appStore') @observer @Form.create()
@@ -67,8 +68,9 @@ class LoginForm extends React.Component {
           })
           return
         }
-        const users = this.props.appStore.users
+        const users = this.props.appStore.users;
         // 检测用户名是否存在
+        users.find(item => item.username === values.username)
         const result = users.find(item => item.username === values.username)
         if (!result) {
           this.props.form.setFields({
@@ -90,7 +92,6 @@ class LoginForm extends React.Component {
             return
           }
         }
-
         this.props.appStore.toggleLogin(true, {username: values.username})
         const {from} = this.props.location.state || {from: {pathname: '/'}}
         this.props.history.push(from)

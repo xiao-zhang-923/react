@@ -283,14 +283,6 @@ class Login extends React.Component {
     this.props.appStore.initUsers()
     this.particle = new BGParticle('backgroundBox')
     this.particle.init()
-    notification.open({
-      message: '初始登录',
-      duration: 10,
-      description: (<ul>
-        <li>账号：admin</li>
-        <li>密码：admin</li>
-      </ul>)
-    })
   }
   componentWillUnmount(){
     this.particle.destory()
