@@ -8,7 +8,7 @@ import 'animate.css'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 
-const url = 'https://github.com/zhangZhiHao1996/image-store/blob/master/react-admin-master/bg1.jpg?raw=true'
+const url = 'https://github.com/ypp123/react/blob/master/src/assets/img/login.jpg';
 
 
 @withRouter @inject('appStore') @observer
@@ -38,16 +38,18 @@ class Login extends React.Component {
       loading:true
     })
     this.props.appStore.initUsers()
-    this.loadImageAsync(url).then(url=>{
-      this.setState({
-        loading:false,
-        url
-      })
-    }).then(()=>{
-      //为什么写在then里？id为backgroundBox的DOM元素是在loading为false时才有，而上面的setState可能是异步的，必须等到setState执行完成后才去获取dom
-      this.particle = new BGParticle('backgroundBox')
-      this.particle.init()
+    // this.loadImageAsync(url).then(url=>{
+      
+    // }).then(()=>{
+    //   //为什么写在then里？id为backgroundBox的DOM元素是在loading为false时才有，而上面的setState可能是异步的，必须等到setState执行完成后才去获取dom
+     
+    // })
+    this.setState({
+      loading:false,
+      url
     })
+    this.particle = new BGParticle('backgroundBox')
+    this.particle.init()
   }
   //切换showbox
   switchShowBox = (box) => {
@@ -60,6 +62,7 @@ class Login extends React.Component {
   loadImageAsync (url) {
     return new Promise(function(resolve, reject) {
       const image = new Image();
+      debugger;
       image.onload = function() {
         resolve(url);
       };
